@@ -1,0 +1,44 @@
+#main-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-container form{
+    max-width: 300px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#main-container form img{
+    margin: 0 auto;
+}
+
+#main-container form input{
+    height: 48px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    padding:0 20px;
+    margin-top: 30px;
+}
+
+#main-container form button{
+    height: 48px;
+    background-color: #f8485e;
+    background: linear-gradient(99.99deg,#f8485e 3.84%,#e11383 97.59%);
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 0 20px;
+    margin-top: 10px;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+    border: 0;
+}
+
+#main-container form button:hover{
+    opacity: 0.8;
+}
