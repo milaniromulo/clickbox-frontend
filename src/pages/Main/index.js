@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 
-import "./index.css"
-import logo from '../../assets/ClickBox.svg'
+import "./index.css";
+import logo from '../../assets/ClickBox.svg';
 
 class Main extends Component {
 
@@ -13,9 +13,14 @@ class Main extends Component {
         };
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state.newBox)
+
+        const response = await api.post('/boxes',{
+            title: this.state.newBox
+        })
+
+        this.props.history.push(`/box/${response.data._id}`);
     }
 
     handleImputChange = (e) => {
@@ -35,7 +40,7 @@ class Main extends Component {
                     valur={this.state.newBox}
                     onChange={this.handleImputChange}
                     />
-                    <button type="submit">CRIAR</button>
+                    <button type="submit">Criar</button>
                 </form>
             </div>
         );
