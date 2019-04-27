@@ -4,6 +4,7 @@ import api from '../../services/api';
 import { distanceInWords } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import DropZone from 'react-dropzone';
+import socket from 'socket.io-client';
 
 import logo from '../../assets/ClickBox.svg';
 
@@ -20,11 +21,28 @@ class Box extends Component {
     }
 
     async componentWillMount(){
+        this.subscribeToNewFiles();
+
         const response = await api.get(`boxes/${this.props.match.params.id}`);
 
         this.setState({
             box: response.data
         })
+    }
+
+    subscribeToNewFiles(){
+        const box = this.props.match.params.id;
+        const io = socket('https://clickbox-backend.herokuapp.com');
+
+        io.emit('connectRoom', box);
+        io.on('file', data => {
+            this.setState({
+                box: {
+                    ...this.state.box, 
+                    files:[ data, ...this.state.box.files ]
+                }
+            })
+        });
     }
 
     handleUpload = (files) => {
